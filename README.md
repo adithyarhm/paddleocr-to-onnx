@@ -20,14 +20,25 @@ inference_onnx.py           # Inferensi dengan ONNXRuntime CPU
 
 ## Requirements
 
+### 1. Install PaddlePaddle 3.x (CPU)
+
+```bash
+python -m pip install paddlepaddle==3.0.0 -i https://www.paddlepaddle.org.cn/packages/stable/cpu/
+```
+
+Verifikasi:
+```bash
+python -c "import paddle; print(paddle.__version__)"
+# Output: 3.0.0
+```
+
+### 2. Install dependencies lainnya
+
 ```bash
 pip install -r requirements.txt
 ```
 
-> **Note:** Install PaddlePaddle CPU terlebih dahulu sebelum install requirements.
-> ```bash
-> pip install paddlepaddle==2.6.1 -i https://pypi.tuna.tsinghua.edu.cn/simple
-> ```
+> **Catatan:** `paddle2onnx>=1.2.0` memerlukan `paddlepaddle>=3.0.0b2`. Pastikan Paddle 3.x sudah terinstall sebelum menjalankan perintah di atas.
 
 ## Quick Start
 
@@ -52,7 +63,7 @@ Lalu jalankan script parser:
 ```bash
 python data/prepare_cord.py
 ```
-Output: `data/rec_train/` (cropped word images + `rec_gt_train.txt`) dan `data/rec_val/` (`rec_gt_val.txt`).
+Output: `data/rec_train/` (cropped word images + `rec_gt_train.txt`) dan `data/rec_val/` (`rec_gt_dev.txt`).
 
 ### 2. Clone PaddleOCR & Download pretrained model
 
