@@ -8,6 +8,9 @@ opencv-python>=4.8.0
 Pillow>=10.0.0
 numpy>=1.24.0
 
+# DB Postprocess (det model)
+shapely>=2.0.0                 # untuk unclip polygon di DBNet++ postprocess
+
 # API server
 fastapi>=0.110.0
 uvicorn[standard]>=0.29.0
@@ -19,6 +22,6 @@ tqdm>=4.65.0
 pyyaml>=6.0
 
 # NOTE: Install PaddlePaddle GPU terlebih dahulu (sebelum requirements ini):
-# pip install paddlepaddle-gpu==3.0.0 -i https://www.paddlepaddle.org.cn/packages/stable/cu118/
+# pip install paddlepaddle-gpu==3.0.0 -i https://www.paddlepaddle.org.cn/packages/stable/cu126/
 # Verifikasi GPU terdeteksi:
 # python -c "import paddle; print(paddle.device.get_device())"
