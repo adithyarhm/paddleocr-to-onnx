@@ -1,8 +1,11 @@
 # Fine-tune PP-OCRv4 mobile rec model pada CORD-1000
+# Optimized for: AMD Ryzen 7 5800X + NVIDIA RTX 4080 SUPER (16GB VRAM)
 # Base: PaddleOCR/configs/rec/PP-OCRv4/en_PP-OCRv4_mobile_rec.yml
 
 Global:
-  use_gpu: false
+  use_gpu: true                  # RTX 4080 SUPER
+  use_amp: true                  # Automatic Mixed Precision (FP16) - hemat VRAM, ~2x lebih cepat
+  amp_level: O1                  # O1 = mixed precision (aman untuk rec model)
   epoch_num: 50
   log_smooth_window: 20
   print_batch_step: 10
@@ -27,7 +30,7 @@ Optimizer:
   beta2: 0.999
   lr:
     name: Cosine
-    learning_rate: 0.0005   # lebih kecil dari default karena fine-tune
+    learning_rate: 0.0005        # lebih kecil dari default karena fine-tune
     warmup_epoch: 5
   regularizer:
     name: L2
@@ -103,9 +106,9 @@ Train:
             - valid_ratio
   loader:
     shuffle: true
-    batch_size_per_card: 128
+    batch_size_per_card: 256     # RTX 4080 SUPER 16GB VRAM: aman di 256 (dari 128)
     drop_last: true
-    num_workers: 4
+    num_workers: 8               # Ryzen 7 5800X 8-core: set 8 workers
 
 Eval:
   dataset:
@@ -131,5 +134,5 @@ Eval:
   loader:
     shuffle: false
     drop_last: false
-    batch_size_per_card: 128
-    num_workers: 4
+    batch_size_per_card: 256
+    num_workers: 8

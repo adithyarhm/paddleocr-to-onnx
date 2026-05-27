@@ -1,6 +1,6 @@
 # Core ML
 paddle2onnx>=1.2.0
-onnxruntime>=1.17.0
+onnxruntime>=1.17.0            # untuk inference CPU
 onnx>=1.14.0
 
 # Image processing
@@ -17,3 +17,8 @@ pydantic>=2.0.0
 # Utilities
 tqdm>=4.65.0
 pyyaml>=6.0
+
+# NOTE: Install PaddlePaddle GPU terlebih dahulu (sebelum requirements ini):
+# pip install paddlepaddle-gpu==3.0.0 -i https://www.paddlepaddle.org.cn/packages/stable/cu118/
+# Verifikasi GPU terdeteksi:
+# python -c "import paddle; print(paddle.device.get_device())"
